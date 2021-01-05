@@ -1,8 +1,12 @@
 ## Normal vim 
 
 ```
-sudo rm -r ~/.vim
-sudo rm ~/.vimrc
+rm -rf ~/.vim
+rm ~/.vimrc
+
+git clone https://github.com/Jovian-Dsouza/my_vim
+
+cp  my_vim/.vimrc .
 mkdir -p ~/.vim/undodir
 
 #install vim-plug
