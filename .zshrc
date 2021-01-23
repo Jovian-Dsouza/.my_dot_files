@@ -100,4 +100,15 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+#HELPER
+alias editZsh="vim ~/.zshrc"
+alias sourceZsh="source ~/.zshrc"
+alias pushDotfiles="cd ~/.my_dot_files && git add . \
+    && git commit -m 'Update Dotfiles' && git push origin "
+
+#ROS
 source /opt/ros/melodic/setup.zsh
+source ~/task5_ws/devel/setup.zsh
+alias task5_ws="catkin_make -C ~/task5_ws && source ~/task5_ws/devel/setup.zsh"
+
+
