@@ -4,9 +4,9 @@
 rm -rf ~/.vim
 rm ~/.vimrc
 
-git clone https://github.com/Jovian-Dsouza/my_vim
+git clone https://github.com/Jovian-Dsouza/.my_vim
 
-cp  my_vim/.vimrc .
+cp  .my_vim/.vimrc .
 mkdir -p ~/.vim/undodir
 
 #install vim-plug
