@@ -1,3 +1,9 @@
+## Setting up zshrc
+```
+rm ~/.zshrc
+ln -sv ~/.my_dot_files/.zshrc ~
+```
+
 ## Normal vim 
 
 ```
@@ -6,7 +12,7 @@ rm ~/.vimrc
 
 git clone https://github.com/Jovian-Dsouza/.my_dot_files
 
-cp  .my_dot_files/.vimrc .
+ln -sv ~/.my_dot_files/.vimrc ~
 mkdir -p ~/.vim/undodir
 
 #install vim-plug
