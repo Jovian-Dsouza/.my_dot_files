@@ -27,7 +27,7 @@ Plug 'vim-utils/vim-man'
 Plug 'lyuts/vim-rtags' " for c++
 Plug 'mbbill/undotree'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'taketwo/vim-ros'
+" Plug 'taketwo/vim-ros'
 
 call plug#end()
 
