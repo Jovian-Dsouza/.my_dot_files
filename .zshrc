@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,15 +100,52 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
 #HELPER
 alias editZsh="vim ~/.zshrc"
 alias sourceZsh="source ~/.zshrc"
 alias pushDotfiles="cd ~/.my_dot_files && git add . \
     && git commit -m 'Update Dotfiles' && git push origin "
 
-#ROS
-source /opt/ros/melodic/setup.zsh
-source ~/task5_ws/devel/setup.zsh
-alias task5_ws="catkin_make -C ~/task5_ws && source ~/task5_ws/devel/setup.zsh"
+#Hybrid Graphics
+## GLX Applications : __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia <application>
+## Vulcan : __NV_PRIME_RENDER_OFFLOAD=1 <application>
 
+# alias gazebo="__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia gazebo"
+# alias gzserver="__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia gzserver"
+# alias gzclient="__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia gzclient"
 
+#Gazebo
+source /usr/share/gazebo/setup.sh
+
+#ROS2
+source /opt/ros/foxy/setup.zsh
+alias turtlebot3_ws="source ~/ros2/turtlebot3_ws/install/setup.zsh"
+alias amazon_ws="source /home/jovian/ros2/amazon_ws/install/setup.zsh"
+
+#Docker container Alias
+alias amazon_warehouse_single="xhost + && docker start -i amazon_warehouse_single"
+alias amazon_warehouse_multiple="xhost + && docker start -i amazon_warehouse_multi"
+alias amazon_warehouse_slam="xhost +  && docker start -i amazon_warehouse_slam"
+#ADE Alias
+alias adehome="cd ~/docker/adehome"
+alias editFoxy="code ~/docker/adehome/AutowareAuto/tools/my_ade_image/Dockerfile"
+alias buildFoxy="cd ~/docker/adehome/AutowareAuto/tools/my_ade_image/ && ./build.sh && cd -"
+alias foxy="ade --rc ~/docker/adehome/AutowareAuto/.aderc-my-foxy  start --enter && ade stop"
+
+#Turtlebot3
+export GAZEBO_MODEL_PATH=~/ros2/turtlebot3_ws/src/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/models:$GAZEBO_MODEL_PATH
+export TURTLEBOT3_MODEL=waffle
+
+## Amazon warehouse and robot models
+export GAZEBO_MODEL_PATH=/home/jovian/ros2/amazon_ws/src/amazon_robot/aws-robomaker-small-warehouse-world/models:$GAZEBO_MODEL_PATH
+export GAZEBO_MODEL_PATH=/home/jovian/ros2/amazon_ws/src/amazon_robot/amazon_robot_gazebo/models:$GAZEBO_MODEL_PATH
+
+# Robotics Academy
+alias docker_academy="docker run -it --rm -p 8080:8080 -p 7681:7681 -p 2303:2303 -p 1905:1905 -p 8765:8765 -p 6080:6080 -p 1108:1108 docker_academy:latest python3.8 manager.py"
+
+alias docker_exec="docker exec -it $(docker ps -q) /bin/bash"
